@@ -87,7 +87,7 @@ required_columns = ['brand', 'clothing_size', 'clothing_size_group', 'color', 'g
 
 config = {
     'model_name' : model_name,
-    'endpoint' : 'https://wmtllmgateway.stage.walmart.com/wmtllmgateway/v1/openai',
+    'endpoint' : 'https://openai',
     'api_version' : '2024-02-01',
     'temperature' : 0
 }
