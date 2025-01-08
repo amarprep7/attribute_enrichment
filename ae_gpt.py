@@ -72,11 +72,11 @@ market = 'mx'
 
 
 
-input_table = "wmt-mlp-p-intlctlg-intlctlg.attribute_extraction_llm.ae_input_table_v2"
-catalog_table = "wmt-mlp-p-intlctlg-intlctlg.intl_catalog.tenant_mx_catalog"
-target_location = "wmt-mlp-p-intlctlg-intlctlg.attribute_extraction_llm.ae_result_v3"
-finetune_location = "wmt-mlp-p-intlctlg-intlctlg.attribute_extraction_llm.ae_finetune_data_v3"
-track_location = "wmt-mlp-p-intlctlg-intlctlg.attribute_extraction_llm.ae_track_v1"
+input_table = "attribute_extraction_llm.ae_input_table_v2"
+catalog_table = "intl_catalog.tenant_mx_catalog"
+target_location = "attribute_extraction_llm.ae_result_v3"
+finetune_location = "attribute_extraction_llm.ae_finetune_data_v3"
+track_location = "attribute_extraction_llm.ae_track_v1"
 
 
 model_name = 'gpt-4o-mini'
@@ -98,13 +98,13 @@ warnings.filterwarnings('ignore')
 if model_name == 'gpt-4o-mini':
     key_path = 'private_key_4o_mini.pem'
 else:
-    key_path = 'title_norm_ptu_private_key.pem'
+    key_path = 'private_key_4o.pem'
 
 
 with open(key_path, 'rb') as f:
     private_key = f.read()
 
-bucket_name = 'gs://wmt-mlp-p-intlctlg-export-bucket'
+bucket_name = 'gs://bucket'
 parquet_path = f'AE/GenAI/GPT_4o/poc_{model_name}_{attribute_rules}_{run_id}'
 blob_path = 'AE/GenAI'
 
@@ -239,12 +239,12 @@ def create_openai_api_body(prompt,main_image):
 def create_openai_header():
     global url
     global headers
-    url = "https://wmtllmgateway.stage.walmart.com/wmtllmgateway/v1/openai"
+    url = "https://v1/openai"
     keyVersion='1'
     if model_name == 'gpt-4o-mini':
-        consumer_id = "e33270bd-65e2-431b-86fa-e619d6c3d2d7"
+        consumer_id = "123"
     else:
-        consumer_id = "a839e716-9a9b-43e7-8e30-42a407ea731a"
+        consumer_id = "1234"
     epoch_time = int(time.time()) * 1000
     data = consumer_id + '\n' + str(epoch_time) + '\n' + keyVersion + '\n'
     signature = {}
